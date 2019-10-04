@@ -6,16 +6,19 @@
             <router-view />
         </transition>
     </main>
+    <Footer/>
 </div>
 </template>
 
 <script>
 import Header from './components/general/header.vue';
+import Footer from './components/general/footer.vue';
 
 export default {
     name: 'app',
     components: {
-        Header
+        Header,
+        Footer,
     }
 }
 </script>

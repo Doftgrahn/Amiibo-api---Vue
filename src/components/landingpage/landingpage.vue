@@ -1,27 +1,20 @@
 <template>
 <main>
-
-
+<Hero/>
+<Info/>
 
 </main>
 </template>
 
 <script>
+import Hero from './hero.vue';
+import Info from './info.vue';
 export default {
-    name: 'Landingpage'
+    name: 'Landingpage',
+    components: { Hero, Info }
 }
 </script>
 
 <style lang="scss" scoped>
-main {
-    height: 100%;
-    display: block;
-    min-height: 100vh;
-    background-image: url("~@/assets/zelda.jpg");
-    background-position: center;
-    background-size: contain;
-    background-origin: border-box;
 
-    background-repeat: no-repeat;
-}
 </style>

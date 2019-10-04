@@ -4,18 +4,15 @@
         <Loader />
     </div>
 
-    <div v-if="error">You spelled something wrong! Please try again!</div>
-    <transition-group name="slide-fade">
-        <div class="amiibo" v-for="(amiibo, index) in amiibos" :key="index">
+    <div v-if="error">You spelled something wrong, try again!</div>
+    <div v-if="toMany">You problably used the api to many times. Please try again later</div>
 
-            <figure><img v-bind:src="amiibo.image" :alt="amiibo.character" /> </figure>
-            <h3>Character: {{amiibo.character}}</h3>
-            <p>GameSerie: {{amiibo.gameSeries}}</p>
-            <p>name: {{amiibo.name}}</p>
-
-        </div>
-    </transition-group>
-
+    <div class="amiibo" v-for="amiibo in amiibos" v-bind:key="amiibo.name">
+        <figure><img v-bind:src="amiibo.image" :alt="amiibo.character" /> </figure>
+        <h3>Character: {{amiibo.character}}</h3>
+        <p>GameSerie: {{amiibo.gameSeries}}</p>
+        <p>name: {{amiibo.name}}</p>
+    </div>
 
 
 </main>
@@ -23,8 +20,10 @@
 
 <script>
 import Loader from '../../general/loader.vue';
+
+
 export default {
-    name: 'OneAmiibo',
+    name: 'AllAmiibo',
     components: {
         Loader
     },
@@ -34,6 +33,7 @@ export default {
             loading: false,
             amiibos: null,
             error: false,
+            toMany: false
         }
     },
     watch: {
@@ -48,6 +48,7 @@ export default {
                 url = `https://www.amiiboapi.com/api/amiibo/?character=${text}`;
             this.loading = true;
             this.error = false;
+            this.toMany = false;
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -56,9 +57,13 @@ export default {
                     if (data.code === 404) {
                         this.error = true;
                     }
+                    if (data.code === 429) {
+                        this.toMany = true;
+                    }
                 })
                 .catch(error => {
-                    console.error('Something went ewrong', error)
+                    /* eslint-disable no-console */
+                    console.log('Something went ewrong', error)
                     this.error = true;
                 })
         }

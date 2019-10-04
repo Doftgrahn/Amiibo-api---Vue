@@ -4,17 +4,17 @@
     <img src="@/assets/nintendo.png" />
 
     <SearchAmiibo @sendInput="handleInput" />
-    <OneAmiibo :text="this.textParent" />
+    <AllAmiibo :text="this.textParent" />
 </main>
 </template>
 
 <script>
-import OneAmiibo from './allAmiibo.vue/allAmiibo.vue';
+import AllAmiibo from './allAmiibo.vue/allAmiibo.vue';
 import SearchAmiibo from './searchAmiibo/seachAmiibo.vue';
 export default {
     name: 'Amiibo',
     components: {
-        OneAmiibo,
+        AllAmiibo,
         SearchAmiibo
     },
     data() {
@@ -31,6 +31,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+main {
+    min-height: 100vh;
+}
 img {
     width: 50%;
     height: 100px;

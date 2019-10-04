@@ -2,10 +2,10 @@
 <header>
 
     <nav>
-        <router-link v-for="route in routes" :to="route.path" :key="route.path">{{route.name}}</router-link>
+        <router-link tag="a" v-for="route in routes" :to="route.path" :key="route.path" active-class="active">{{route.name}}</router-link>
     </nav>
 
-</header />
+</header >
 </template>
 
 <script>
@@ -21,6 +21,10 @@ export default {
 
 <style lang="scss" scoped>
 header {
+padding: 0 20px;
+.class {
+    color:blue;
+}
 
     nav {
         max-width: 1100px;
@@ -34,10 +38,15 @@ header {
         a {
             margin: 0 20px;
             //color: black;
+            transition: 0.4s;
             text-decoration: none;
             &:hover {
                 text-decoration: underline;
             }
+        }
+        .router-link-exact-active {
+            text-decoration: underline;
+            transform: scale(1.2);
         }
     }
 }
